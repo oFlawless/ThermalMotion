@@ -21,17 +21,15 @@ TimeUnc = getattr(pm, "TimeUnc", 0.03)                   # s per frame (manual)
 
 # -- Load run --
 # Usable Datasets: 1, 3, 5, 7(maybe), 8, 9, 10, 11, 15 pt2, 16
-DatasetName = "Datasets" 
+DatasetName = "Dataset Yolo" 
 
 #  Per-point uncertainty for r^2 (µm^2) 
 # Model: Δx_um = s*Δx_pix;  σ(Δx_um)^2 = (Δx_pix*σ_s)^2 + σ_loc^2  (same for y)
 sigma_s = PixelSizeUnc            # µm/pixel
 sigma_loc = LocalizationUnc_um    # µm
 
-
 dxT = []
 dyT = []
-
 
 
 # -- Uncertainty Calculator --
@@ -100,8 +98,8 @@ def compute_all_runs(directory_path, um_per_pix, pix_unc, loc_unc):
                 df.columns = [c.strip(" (pixels)").strip() for c in df.columns]
                 xdata = df["X"].to_numpy()
                 ydata = df["Y"].to_numpy()
-                dxT.append(xdata)
-                dyT.append(ydata)
+                #dxT.append(xdata)
+                #dyT.append(ydata)
                 if len(xdata) < 2 or len(ydata) < 2:
                     continue
             except Exception as e:
@@ -124,7 +122,7 @@ s_unc = PixelSizeUnc
 loc_unc = LocalizationUnc_um
 
 r2_runs, run_unc = compute_all_runs(DatasetName, s, s_unc, loc_unc)
-
+'''
 X = np.mean(np.vstack([d[:118] for d in dxT]), axis=0)
 Y = np.mean(np.vstack([d[:118] for d in dyT]), axis=0)
 
@@ -133,9 +131,9 @@ totY = []
 
 for i in range(1, len(X)):
     totX.append((X[i] - X[0])*PixelSize_um)
-    totY.append((Y[i] - Y[0])*PixelSize_um)
+    totY.append((Y[i] - Y[0])*PixelSize_um)'''
 
-print(X)
+#print(X)
 
 if len(r2_runs) == 0:
     raise RuntimeError(f"No valid runs found in {DatasetName}.")
@@ -195,11 +193,11 @@ ax.set_ylabel(r"$\langle r^2\rangle$ ($\mu$m$^2$)")
 ax.set_title(r"Brownian Motion: Mean-squared displacement ($\mu$m$^2$) vs time (s) (run 15)")
 
 # Data with y-error bars (curve_fit used these sigmas)
-#ax.errorbar(t, Rsqr, yerr=sigma_Rsqr, fmt=".", ms=5, capsize=2, elinewidth=0.7,
-#            ecolor='skyblue', label="Experimental data ± σ")
-ax.errorbar(totX, totY)
+ax.errorbar(t, Rsqr, yerr=sigma_Rsqr, fmt=".", ms=5, capsize=2, elinewidth=0.7,
+            ecolor='skyblue', label="Experimental data ± σ")
+#ax.errorbar(totX, totY)
 # Best-fit line
-#ax.plot(t, yfitted, label=fr"Fit: $({a:.3g}\pm{sa:.1g})t + ({b:.3g}\pm{sb:.1g})$ $\mu$m$^2$")
+ax.plot(t, yfitted, label=fr"Fit: $({a:.3g}\pm{sa:.1g})t + ({b:.3g}\pm{sb:.1g})$ $\mu$m$^2$")
 
 # Annotation for D and k
 ax.legend()
