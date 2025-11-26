@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['Bead']
+
+roboflow:
+  workspace: rc-7fo7j
+  project: beads-tracking-brjpx
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/rc-7fo7j/beads-tracking-brjpx/dataset/1
