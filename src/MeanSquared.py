@@ -1,7 +1,11 @@
-# This code find the fitting model of the experimental data set of 
-# Coils Magnetic Field Bc (T) as Function of Inverse Electron Path Radius (m)
-# Data were collected using KeySight 34461A digital multimeter during the Electron Mass to Charge Ratio Experiment. 
-# Source: PHY224 Electron Mass to Charge Ratio Lab, University of Toronto.
+'''
+Brownian mean squared distance analysis:
+- Build r^2 from all datasets in 'Dataset'
+- curve_fit to mean squared distance as a function of Time
+- Residual plots with chi-square
+Measured on Nikkon x40 Objective lens Microscope
+Source: PHY224 Thermal Motion Lab, University of Toronto Physics Department
+'''
 
 # Import Modules
 import numpy as np
