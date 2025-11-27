@@ -156,7 +156,7 @@ fig, ax = plt.subplots(figsize=(9, 5))
 ax.bar(
     centers, density, width=bin_widths,
     edgecolor='k', alpha=0.70, align='center',
-    label="Data (Δr) density"
+    label="Data (Δr) density", facecolor = 'none'
 )
 
 # ⟂ Poisson (density) uncertainty: σ = √n / (N * Δr_bin)
@@ -169,8 +169,8 @@ ax.errorbar(
 
 # Rayleigh overlays
 ax.plot(
-    rgrid, pdf_mle_grid, linewidth=2.0, color='orange',
-    label=f"Rayleigh (MLE)  D={D_hat_um2_per_s:.3g} µm²/s"
+    rgrid, pdf_mle_grid, linewidth=2.0, color='blue',
+    label=f"Rayleigh (MLE)  D={D_hat_um2_per_s:.3g} µm²/s", ls='--'
 )
 ax.plot(
     rgrid, pdf_fit_grid, linewidth=2.0, color='green',

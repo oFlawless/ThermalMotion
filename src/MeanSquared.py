@@ -194,7 +194,7 @@ R = np.sqrt(Rsqr)
 fig, ax = plt.subplots(figsize=(10,5))
 ax.set_xlabel(r"t (s)")
 ax.set_ylabel(r"$\langle r^2\rangle$ ($\mu$m$^2$)")
-ax.set_title(r"Brownian Motion: Mean-squared displacement ($\mu$m$^2$) vs time (s) (run 15)")
+ax.set_title(r"Brownian Motion: Mean-squared displacement ($\mu$m$^2$) vs time (s)")
 
 # Data with y-error bars (curve_fit used these sigmas)
 ax.errorbar(t, Rsqr, yerr=sigma_Rsqr, fmt=".", ms=5, capsize=2, elinewidth=0.7,
